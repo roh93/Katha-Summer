@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">KathaProject</string>
+    <string name="villagers_mode">Villagers Mode</string>
+    <string name="researcher_mode">Researcher Mode</string>
+    <string name="namaste">Namaste</string>
+    <string name="stop_recording">Stop Recording</string>
+
+    <string name="google_maps_key">AIzaSyDyyKSbgwJ-KAyYOLYce1Gw4Jba0HgtTig</string>
+    <string name="gender">Gender</string>
+    <string name="age">Enter Age</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="vote">Vote</string>
+    <string name="occupation">Caste</string>
+    <string name="finish_poll">Finish Poll</string>
+
+    <string-array name="occupation_array">
+        <item>Farmer</item>
+        <item>Domestic Helper</item>
+        <item>Industrialist</item>
+        <item>Others</item>
+    </string-array>
+
+</resources>
