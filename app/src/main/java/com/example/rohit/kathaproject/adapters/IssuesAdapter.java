@@ -1,6 +1,7 @@
 package com.example.rohit.kathaproject.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,15 +21,15 @@ import java.util.List;
 
 public class IssuesAdapter extends RecyclerView.Adapter<IssuesAdapter.ViewHolder> {
 
-    private List issueItemList = new ArrayList<>();
+    private List<Bitmap> issueItemList = new ArrayList<>();
     private Context context;
     private LayoutInflater layoutInflater;
     private ItemLongClickListener longClickListener;
     private ItemClickListener clickListener;
     private NewIssueAddInterface newIssueAddInterface;
 
-    public IssuesAdapter(Context context, List issueList) {
-        issueItemList = issueList;
+    public IssuesAdapter(Context context, List<Bitmap> issueImageList) {
+        issueItemList = issueImageList;
         this.context = context;
         this.layoutInflater = LayoutInflater.from(this.context);
         this.newIssueAddInterface = (NewIssueAddInterface) context;
@@ -43,12 +44,9 @@ public class IssuesAdapter extends RecyclerView.Adapter<IssuesAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.issueName.setText((CharSequence) issueItemList.get(position));
+        holder.issueName.setText("new");
         //***NEED TO ADD IMAGE VIEW HERE***//
-        if(position > (issueItemList.size()- newIssueAddInterface.getIssueImageList().size())){
-            holder.issueImage.setImageBitmap(newIssueAddInterface.getIssueImageList()
-                    .get(position-issueItemList.indexOf("New Item")));
-        }
+        holder.issueImage.setImageBitmap(issueItemList.get(position));
     }
 
     @Override

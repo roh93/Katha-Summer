@@ -35,7 +35,7 @@
         <activity android:name=".activity.InfrastructureCollectionActivity" />
         <activity android:name=".activity.ResearcherModeActivity"/>
         <activity android:name=".activity.DiscussionActivity"/>
-
+        <activity android:name=".activity.PollingActivity"/>
         <service
             android:name=".services.AudioService"
             android:enabled="true"

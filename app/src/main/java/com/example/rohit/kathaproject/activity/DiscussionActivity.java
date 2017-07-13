@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.rohit.kathaproject.R;
+import com.example.rohit.kathaproject.Utils.Util;
 import com.example.rohit.kathaproject.adapters.IssuesAdapter;
 import com.example.rohit.kathaproject.helpers.NewIssueAddInterface;
 
@@ -42,8 +43,8 @@ public class DiscussionActivity extends AppCompatActivity implements IssuesAdapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discussion);
         ButterKnife.bind(this);
-        imageList = this.getIntent().getParcelableArrayListExtra("ImageList");
-        //position = this.getIntent().getIntExtra("Position",0);
+        imageList = Util.getBitmapList(this);
+        position = this.getIntent().getIntExtra("Position",0);
         mainTopicImage.setImageBitmap(imageList.get(position));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         issueRecyclerView.setLayoutManager(layoutManager);
@@ -59,7 +60,7 @@ public class DiscussionActivity extends AppCompatActivity implements IssuesAdapt
                 subTopic1Image.setImageBitmap(imageList.get(position));
                 count++;
             }
-            if(count==1){
+            else if(count==1){
                 subTopic2Image.setImageBitmap(imageList.get(position));
                 count++;
             }

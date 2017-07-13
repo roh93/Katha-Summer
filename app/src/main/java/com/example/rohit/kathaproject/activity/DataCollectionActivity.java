@@ -8,12 +8,14 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.rohit.kathaproject.R;
+import com.example.rohit.kathaproject.Utils.Util;
 import com.example.rohit.kathaproject.adapters.IssuesAdapter;
 import com.example.rohit.kathaproject.constants.AppConsts;
 import com.example.rohit.kathaproject.helpers.NewIssueAddInterface;
@@ -50,8 +52,9 @@ public class DataCollectionActivity extends AppCompatActivity implements IssuesA
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_collection);
         ButterKnife.bind(this);
+        issueImageList = (ArrayList<Bitmap>) Util.getBitmapList(this);
         issuesGridView.setLayoutManager(new GridLayoutManager(this, AppConsts.GRID_COLUMNS));
-        issuesAdapter = new IssuesAdapter(this, issueList);
+        issuesAdapter = new IssuesAdapter(this, issueImageList);
         issuesAdapter.setLongClickListener(this);
         issuesAdapter.setClickListener(this);
         issuesGridView.setAdapter(issuesAdapter);
@@ -112,9 +115,11 @@ public class DataCollectionActivity extends AppCompatActivity implements IssuesA
 
     @Override
     public void onItemClick(View view, int position) {
+        Log.d("position",position+"");
         Intent discussionIntent = new Intent(this,DiscussionActivity.class);
-        discussionIntent.putParcelableArrayListExtra("ImageList", issueImageList);
+        //discussionIntent.putParcelableArrayListExtra("ImageList", issueImageList);
         discussionIntent.putExtra("Position",position);
+        issueImageList.removeAll(issueImageList);
         startActivity(discussionIntent);
     }
 

@@ -1,9 +1,13 @@
 package com.example.rohit.kathaproject.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -13,7 +17,11 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.rohit.kathaproject.Database.PollingDetail;
 import com.example.rohit.kathaproject.Database.PollingResultsCRUD;
 import com.example.rohit.kathaproject.R;
+import com.example.rohit.kathaproject.Utils.Util;
+import com.example.rohit.kathaproject.adapters.IssuesAdapter;
 import com.example.rohit.kathaproject.constants.AppConsts;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +31,7 @@ import butterknife.OnClick;
  * Created by Rohit on 22-06-2017.
  */
 
-class PollingActivity extends AppCompatActivity{
+public class PollingActivity extends AppCompatActivity implements IssuesAdapter.ItemClickListener{
 
     PollingResultsCRUD pollingResultsCRUD;
 
@@ -39,6 +47,10 @@ class PollingActivity extends AppCompatActivity{
     @BindView(R.id.occupation_spinner)
     Spinner occupationSpinner;
 
+    @BindView(R.id.polling_rv)
+    RecyclerView pollingIssueList;
+    private IssuesAdapter pollingAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +58,11 @@ class PollingActivity extends AppCompatActivity{
         ButterKnife.bind(this);
         pollingResultsCRUD = new PollingResultsCRUD(this);
         pollingResultsCRUD.open();
+        pollingIssueList.setLayoutManager(new GridLayoutManager(this, AppConsts.GRID_COLUMNS));
+        List<Bitmap> pollItems= Util.getBitmapList(this);
+        pollingAdapter = new IssuesAdapter(this, pollItems);
+        pollingAdapter.setClickListener(this);
+        pollingIssueList.setAdapter(pollingAdapter);
     }
 
     @OnClick(R.id.btn_vote)
@@ -104,5 +121,10 @@ class PollingActivity extends AppCompatActivity{
     protected void onResume() {
         pollingResultsCRUD.open();
         super.onResume();
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+
     }
 }
