@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/welcome_gradient"
+    android:padding="20dp"
+    android:weightSum="1">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/poll_result_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/poll"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_weight="0.14">
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/map1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Map 1"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_weight="0.14">
+        <Button
+            android:id="@+id/map2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Map 2"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_weight="0.14">
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/map3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Map 3"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_weight="0.14">
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/map4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Map 4"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.14">
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/seasonal_cal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/seasonal_calendar"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.14">
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/activity_cal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/acti_calendar"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_weight="0.14">
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/picture_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/take_picture"/>
+    </RelativeLayout>
+</LinearLayout>
