@@ -17,9 +17,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity">
@@ -29,18 +29,56 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.DashboardActivity"/>
-        <activity android:name=".activity.VillagerWelcomeActivity" />
-        <activity android:name=".activity.DataCollectionActivity" />
-        <activity android:name=".activity.InfrastructureCollectionActivity" />
-        <activity android:name=".activity.ResearcherModeActivity"/>
-        <activity android:name=".activity.DiscussionActivity"/>
-        <activity android:name=".activity.PollingActivity"/>
+
+        <activity
+            android:name=".activity.ResourceMappingActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.DashboardActivity"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name=".activity.VillagerWelcomeActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.DataCollectionActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.InfrastructureCollectionActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.ResearcherModeActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.DiscussionActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.PollingActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.CalendarActivity"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".activity.ActivitiesActivity"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".activity.TransectActivity"
+            android:screenOrientation="landscape" />
+
         <service
             android:name=".services.AudioService"
             android:enabled="true"
-            android:exported="true"/>
-
+            android:exported="true" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />

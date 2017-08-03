@@ -3,4 +3,33 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="primary_light">#B2EBF2</color>
+
+    <color name="accent">#607D8B</color>
+
+    <color name="primary_text">#212121</color>
+
+    <color name="secondary_text">#757575</color>
+
+    <color name="icons">#FFFFFF</color>
+
+    <color name="divider">#BDBDBD</color>
+
+    <color name="legend_red">#FF0000</color>
+
+    <color name="legend_orange">#FFA500</color>
+
+    <color name="legend_blue">#3232FF</color>
+
+    <color name="legend_green">#008000</color>
+
+    <color name="legend_yellow">#FFFF00</color>
+
+    <color name="legend_violet">#5F345F</color>
+
+    <color name="light_grey">#a6a6a6</color>
+
+    <color name="dark_grey">#595959</color>
+
 </resources>

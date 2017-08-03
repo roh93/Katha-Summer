@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <TextView
+            android:layout_toEndOf="@+id/age_tv"
+            android:layout_toRightOf="@+id/age_tv"
+            android:id="@+id/age_choice_tv"
+            android:textSize="24sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/age_tv"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Age: " />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <TextView
+            android:layout_toEndOf="@+id/gender_tv"
+            android:layout_toRightOf="@+id/gender_tv"
+            android:id="@+id/gender_choice_tv"
+            android:textSize="24sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/gender_tv"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gender: " />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_toEndOf="@+id/occupation_tv"
+            android:layout_toRightOf="@+id/occupation_tv"
+            android:id="@+id/occupation_choice_tv"
+            android:textSize="24sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/occupation_tv"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Occupation: " />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_toEndOf="@+id/issue_selected_tv"
+            android:layout_toRightOf="@+id/issue_selected_tv"
+            android:id="@+id/issue_choice_tv"
+            android:textSize="24sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/issue_selected_tv"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Issue Selected: " />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/issue_selected_iv"
+        android:layout_gravity="center"
+        android:layout_width="120dp"
+        android:layout_height="120dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+    <Button
+        android:background="@drawable/done"
+        android:layout_weight="0.5"
+        android:padding="10dp"
+        android:id="@+id/confirm_btn"
+        android:layout_width="0dp"
+        android:layout_height="100dp" />
+    <Button
+        android:background="@drawable/delete"
+        android:layout_weight="0.5"
+        android:id="@+id/cancel_btn"
+        android:layout_gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="100dp" />
+    </LinearLayout>
+
+</LinearLayout>

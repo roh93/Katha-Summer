@@ -44,8 +44,6 @@ public class IssuesAdapter extends RecyclerView.Adapter<IssuesAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.issueName.setText("new");
-        //***NEED TO ADD IMAGE VIEW HERE***//
         holder.issueImage.setImageBitmap(issueItemList.get(position));
     }
 
@@ -60,7 +58,6 @@ public class IssuesAdapter extends RecyclerView.Adapter<IssuesAdapter.ViewHolder
         ImageView issueImage;
         public ViewHolder(View itemView) {
             super(itemView);
-            issueName = (TextView) itemView.findViewById(R.id.issue_item_tv);
             issueImage = (ImageView) itemView.findViewById(R.id.issue_item_iv);
             itemView.setOnLongClickListener(this);
             itemView.setOnClickListener(this);

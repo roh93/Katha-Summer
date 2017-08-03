@@ -93,4 +93,18 @@ public class PollingResultsCRUD {
         return polledIssueList;
     }
 
+    public List<String> getPolledIssueListTotal() {
+        List<String> polledIssueList = new ArrayList<>();
+        Cursor cursor = database.query(DbConstants.TABLE_NAME
+                ,new String[]{DbConstants.COLUMN_ISSUE}
+                ,null
+                ,null , null, null, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            polledIssueList.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return polledIssueList;
+    }
 }

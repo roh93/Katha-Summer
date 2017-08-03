@@ -24,4 +24,19 @@ public class DbConstants {
             + " integer not null, " + COLUMN_ISSUE
             + " text not null" + ");";
 
+    public static final String MIND_MAP_DB_NAME = "MindMap.db";
+    public static final String MIND_MAP_TABLE_NAME = "MIND_MAP";
+    public static final String ISSUE_NAME = "ISSUE NAME";
+    public static final String START_TIME = "START TIME";
+    public static final String STOP_TIME = "STOP TIME";
+    public static final String IS_MAIN_TOPIC = " IS MAIN TOPIC";
+
+    public static final String MIND_MAP_DB_CREATE = "create table "
+            + MIND_MAP_TABLE_NAME + "( " + COLUMN_ID
+            + " integer primary key autoincrement, " + ISSUE_NAME
+            + " text not null, " + START_TIME
+            + " text not null, " + STOP_TIME
+            + " text not null, " + IS_MAIN_TOPIC
+            + " text not null" + ");";
+
 }

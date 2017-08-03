@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/map_screen_rv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#6776">
+
+    <com.example.rohit.kathaproject.helpers.TransectViewHelper
+        android:layout_alignParentTop="true"
+        android:id="@+id/rm_map_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/black_view"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:background="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/rm_options_panel"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:id="@+id/black_view"
+        android:layout_height="5dp"
+        android:background="@android:color/black"
+        android:layout_above="@id/rm_options_panel"/>
+
+</RelativeLayout>

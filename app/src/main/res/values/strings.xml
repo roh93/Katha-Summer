@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KathaProject</string>
+    <string name="app_name">Sanlaap</string>
     <string name="villagers_mode">Villagers Mode</string>
     <string name="researcher_mode">Researcher Mode</string>
     <string name="namaste">Namaste</string>
@@ -11,7 +11,7 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="vote">Vote</string>
-    <string name="occupation">Caste</string>
+    <string name="occupation">Occupation</string>
     <string name="finish_poll">Finish Poll</string>
 
     <string-array name="occupation_array">
@@ -21,4 +21,33 @@
         <item>Others</item>
     </string-array>
 
+    <item name="visible" type="id"/>
+    <item name="masked" type="id"/>
+
+    <string name="title_recording">Recording</string>
+    <string name="start_recording">Start Recording</string>
+
+    <string name="permission_external_storage">Needs external storage permission</string>
+
+    <string name="calendar_mode">Calendar</string>
+    <string name="calendar_crop">Crop Calendar</string>
+    <string name="calendar_legend">Color Legends:</string>
+    <string name="calendar_rice">Rice</string>
+    <string name="calendar_wheat">Wheat</string>
+    <string name="calendar_potato">Potato</string>
+    <string name="calendar_tomato">Tomato</string>
+    <string name="calendar_mushroom">Mushroom</string>
+    <string name="calendar_others">Others</string>
+    <string name="activity_calendar">Activity Calendar</string>
+    <string name="farming">Farming</string>
+    <string name="non_farming">Non Farming</string>
+    <string name="festivals">Festivals</string>
+    <string name="others">Others</string>
+    <string name="seasonal_calendar">Seasonal Calendar</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="acti_calendar">Activity Calendar</string>
+    <string name="input_text">Input Text</string>
+    <string name="Reset">Reset</string>
+
 </resources>
+

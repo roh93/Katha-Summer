@@ -4,10 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/welcome_gradient"
     tools:context="com.example.rohit.kathaproject.activity.MainActivity">
 
     <ImageView
         android:layout_marginTop="40dp"
+        android:src="@drawable/villager_mode"
         android:id="@+id/villager_mode_btn"
         android:layout_width="192dp"
         android:layout_height="192dp"
@@ -15,6 +17,7 @@
 
     <ImageView
         android:layout_marginTop="40dp"
+        android:src="@drawable/researcher_mode"
         android:layout_below="@+id/villager_mode_btn"
         android:id="@+id/researcher_mode_btn"
         android:layout_width="192dp"
