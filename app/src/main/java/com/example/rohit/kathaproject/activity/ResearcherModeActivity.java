@@ -78,7 +78,7 @@ public class ResearcherModeActivity extends AppCompatActivity{
 
     @OnClick(R.id.picture_btn)
     public void takePicture(){
-        if(count<3) {
+        if(count<11) {
             Intent camera = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(camera, 1);
         } else {
@@ -132,7 +132,7 @@ public class ResearcherModeActivity extends AppCompatActivity{
     }
 
     @OnClick(R.id.poll_result_btn)
-    public void getPollResults(){
+    public void getPollResults() {
         Dialog pollResultDialog = new Dialog(ResearcherModeActivity.this);
         pollResultDialog.setTitle("Poll Results");
         pollResultDialog.setContentView(R.layout.poll_result_dialog);
@@ -142,10 +142,15 @@ public class ResearcherModeActivity extends AppCompatActivity{
         TextView femaleTV = (TextView) pollResultDialog.findViewById(R.id.female_result_tv);
         PollingResultsCRUD pr = new PollingResultsCRUD(ResearcherModeActivity.this);
         pr.open();
-        maleTV.setText(getMostCommonString(pr.getPolledIssueListBySex("Male")));
-        femaleTV.setText(getMostCommonString(pr.getPolledIssueListBySex("Female")));
-        totalTV.setText(getMostCommonString(pr.getPolledIssueListTotal()));
+        if (!pr.getPolledIssueListBySex("Male").isEmpty()) {
+            maleTV.setText(getMostCommonString(pr.getPolledIssueListBySex("Male")));
+        }
+        if (!pr.getPolledIssueListBySex("Female").isEmpty()) {
+            femaleTV.setText(getMostCommonString(pr.getPolledIssueListBySex("Female")));
+        }
+        if (!pr.getPolledIssueListTotal().isEmpty()){
+            totalTV.setText(getMostCommonString(pr.getPolledIssueListTotal()));
+        }
         pr.close();
     }
-
 }

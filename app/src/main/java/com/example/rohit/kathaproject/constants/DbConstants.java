@@ -11,7 +11,9 @@ public class DbConstants {
     public static final String COLUMN_SEX = "SEX";
     public static final String COLUMN_AGE = "AGE";
     public static final String COLUMN_OCCUPATION = "OCCUPATION";
-    public static final String COLUMN_ISSUE = "ISSUE";
+    public static final String COLUMN_ISSUE1 = "ISSUE1";
+    public static final String COLUMN_ISSUE2 = "ISSUE2";
+    public static final String COLUMN_ISSUE3 = "ISSUE3";
 
     public static final String DATABASE_NAME = "PollingResults.db";
     public static final int DATABASE_VERSION = 1;
@@ -21,7 +23,9 @@ public class DbConstants {
             + " integer primary key autoincrement, " + COLUMN_SEX
             + " text not null, " + COLUMN_AGE
             + " integer not null, " + COLUMN_OCCUPATION
-            + " integer not null, " + COLUMN_ISSUE
+            + " integer not null, " + COLUMN_ISSUE1
+            + " integer not null, " + COLUMN_ISSUE2
+            + " integer not null, " + COLUMN_ISSUE3
             + " text not null" + ");";
 
     public static final String MIND_MAP_DB_NAME = "MindMap.db";

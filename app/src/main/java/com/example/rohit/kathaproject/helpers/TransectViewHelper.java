@@ -25,13 +25,15 @@ import java.util.Map;
 
 public class TransectViewHelper extends SubsamplingScaleImageView implements View.OnTouchListener {
 
-    private PointF vPrevious;
-    private PointF vStart;
-    private boolean drawing = false;
     private int strokeWidth;
     private List<PointF> sPoints;
     private Bitmap pin;
     private PointF sPin;
+    private Paint paint;
+    Path mPath = new Path();
+    Paint mPaint = new Paint();
+    private Bitmap  mBitmap;
+    private Canvas  mCanvas;
 
     public TransectViewHelper(Context context, AttributeSet attr) {
         super(context, attr);
@@ -48,6 +50,11 @@ public class TransectViewHelper extends SubsamplingScaleImageView implements Vie
         setOnTouchListener(this);
         float density = getResources().getDisplayMetrics().densityDpi;
         strokeWidth = (int)(density/60f);
+        paint = new Paint();
+        paint.setColor(Color.RED);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(2);
+        paint.setAntiAlias(true);
     }
 
     public void setPin(PointF sPin, Bitmap bitmap) {
@@ -63,62 +70,26 @@ public class TransectViewHelper extends SubsamplingScaleImageView implements Vie
     }
 
     @Override
-    public boolean onTouchEvent(@NonNull MotionEvent event) {
-/*        if (sPoints != null && !drawing) {
-            return super.onTouchEvent(event);
-        }*/
-        boolean consumed = false;
-        int touchCount = event.getPointerCount();
-        switch (event.getAction()) {
+    public boolean onTouchEvent(MotionEvent event) {
+
+        switch (event.getAction()){
+
             case MotionEvent.ACTION_DOWN:
-            case MotionEvent.ACTION_POINTER_1_DOWN:
-                vStart = new PointF(event.getX(), event.getY());
-                vPrevious = new PointF(event.getX(), event.getY());
+                mPath.moveTo(event.getX(), event.getY());
                 break;
-            case MotionEvent.ACTION_POINTER_2_DOWN:
-                // Abort any current drawing, user is zooming
-                vStart = null;
-                vPrevious = null;
-                break;
+
             case MotionEvent.ACTION_MOVE:
-                PointF sCurrentF = viewToSourceCoord(event.getX(), event.getY());
-                if(sCurrentF != null){
-                    PointF sCurrent = new PointF(sCurrentF.x, sCurrentF.y);
-                    PointF sStart = vStart == null ? null : new PointF(viewToSourceCoord(vStart).x, viewToSourceCoord(vStart).y);
-
-                    if (touchCount == 1 && vStart != null) {
-                        float vDX = Math.abs(event.getX() - vPrevious.x);
-                        float vDY = Math.abs(event.getY() - vPrevious.y);
-                        if (vDX >= strokeWidth * 5 || vDY >= strokeWidth * 5) {
-                            if (sPoints == null) {
-                                sPoints = new ArrayList<PointF>();
-                            }
-                            sPoints.add(sStart);
-                            sPoints.add(sCurrent);
-                            sPoints.add(new PointF(11111,11111));
-                            vPrevious.x = event.getX();
-                            vPrevious.y = event.getY();
-                            drawing = true;
-                        }
-                        consumed = true;
-                        invalidate();
-
-                    } else if (touchCount == 1) {
-                        // Consume all one touch drags to prevent odd panning effects handled by the superclass.
-                        consumed = true;
-                    }
-                }
-                break;
-            case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_POINTER_UP:
+                mPath.lineTo(event.getX(), event.getY());
                 invalidate();
-                drawing = false;
-                vPrevious = null;
-                vStart = null;
+                break;
+
+            case MotionEvent.ACTION_UP:
+                break;
         }
-        // Use parent to handle pinch and two-finger pan.
-        return consumed || super.onTouchEvent(event);
+
+        return true;
     }
+
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -128,49 +99,34 @@ public class TransectViewHelper extends SubsamplingScaleImageView implements Vie
         if (!isReady()) {
             return;
         }
+        mPaint.setColor(Color.BLUE);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeJoin(Paint.Join.ROUND);
+        mPaint.setStrokeCap(Paint.Cap.ROUND);
+        mPaint.setStrokeWidth(10);
+        canvas.drawPath(mPath, mPaint);
 
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-
-        if (sPoints != null && sPoints.size() >= 2) {
-            Path vPath = new Path();
-            PointF vPrev = sourceToViewCoord(sPoints.get(0).x, sPoints.get(0).y);
-            vPath.moveTo(vPrev.x, vPrev.y);
-            for (int i = 1; i < sPoints.size() - 1; i++) {
-                if (sPoints.get(i).x == 11111 && sPoints.get(i).y == 11111) {
-                    vPrev = sourceToViewCoord(sPoints.get(i + 1).x, sPoints.get(i + 1).y);
-                    vPath.moveTo(vPrev.x, vPrev.y);
-                } else {
-                    PointF vPoint = sourceToViewCoord(sPoints.get(i).x, sPoints.get(i).y);
-                    vPath.quadTo(vPrev.x, vPrev.y, (vPoint.x + vPrev.x) / 2, (vPoint.y + vPrev.y) / 2);
-                    vPrev = vPoint;
-                }
+        for (Map.Entry<PointF, Bitmap> pair : iconList.entrySet()) {
+            if (pair.getKey() != null && pair.getValue() != null) {
+                PointF vPin = sourceToViewCoord(pair.getKey());
+                float vX = vPin.x - (pair.getValue().getWidth() / 2);
+                float vY = vPin.y - pair.getValue().getHeight();
+                canvas.drawBitmap(pair.getValue(), vX, vY, paint);
             }
-            paint.setStyle(Paint.Style.STROKE);
-            paint.setStrokeCap(Paint.Cap.ROUND);
-            paint.setStrokeWidth(strokeWidth * 2);
-            paint.setColor(Color.BLACK);
-            canvas.drawPath(vPath, paint);
-            paint.setStrokeWidth(strokeWidth);
-            paint.setColor(Color.argb(255, 51, 181, 229));
-            canvas.drawPath(vPath, paint);
-
-
-            for (Map.Entry<PointF, Bitmap> pair : iconList.entrySet()) {
-                if (pair.getKey() != null && pair.getValue() != null) {
-                    PointF vPin = sourceToViewCoord(pair.getKey());
-                    float vX = vPin.x - (pair.getValue().getWidth() / 2);
-                    float vY = vPin.y - pair.getValue().getHeight();
-                    canvas.drawBitmap(pair.getValue(), vX, vY, paint);
-                }
-            }
-
         }
     }
 
     public void reset() {
         this.sPoints = null;
         invalidate();
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+
+        mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        mCanvas = new Canvas(mBitmap);
     }
 
 }

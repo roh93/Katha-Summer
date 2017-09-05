@@ -32,7 +32,7 @@ import butterknife.ButterKnife;
 public class TransectActivity extends AppCompatActivity implements IssuesAdapter.ItemClickListener, NewIssueAddInterface {
 
     private TransectViewHelper mapImage;
-    String loadPath = Environment.getExternalStorageDirectory()+"/Sanlap/MapInput/map4/map1.jpg";
+    String loadPath = Environment.getExternalStorageDirectory()+"/Sanlap/MapInput/map4/map1.png";
     @BindView(R.id.rm_options_panel)
     RecyclerView optionsRV;
     private IssuesAdapter optionsAdapter;

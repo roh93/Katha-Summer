@@ -7,6 +7,7 @@
     android:background="#6776">
 
     <com.example.rohit.kathaproject.helpers.TransectViewHelper
+        android:padding="20dp"
         android:layout_alignParentTop="true"
         android:id="@+id/rm_map_iv"
         android:layout_width="match_parent"

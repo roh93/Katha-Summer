@@ -3,11 +3,14 @@ package com.example.rohit.kathaproject.activity;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.PointF;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.util.LruCache;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +21,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.example.rohit.kathaproject.R;
 import com.example.rohit.kathaproject.Utils.Util;
@@ -36,6 +42,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.rohit.kathaproject.helpers.BitmapHelper.loadBitmap;
+
 
 /**
  * Created by Rohit on 31-05-2017.
@@ -52,7 +60,8 @@ public class ResourceMappingActivity extends AppCompatActivity implements Issues
     Bitmap optionImage = null;
     List<Bitmap> optionImages = new ArrayList<>();
     String storePath = Environment.getExternalStorageDirectory()+"/Sanlap/MapOutput/";
-    String loadPath = Environment.getExternalStorageDirectory()+"/Sanlap/MapInput/";
+    String loadPathPng = Environment.getExternalStorageDirectory()+"/Sanlap/MapInput/";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,38 +81,34 @@ public class ResourceMappingActivity extends AppCompatActivity implements Issues
         switch (getIntent().getIntExtra("MapChoice",0)){
             case 1:
                 storePath = storePath +"/map1.png";
-                loadPath = loadPath + "/map1/map1.jpg";
+                loadPathPng = loadPathPng + "/map1/map1.png";
                 optionImages = Util.getAllMapImages(this);
+                optionsRV.setBackgroundColor(Color.argb(108,244,154,84));
                 break;
             case 2:
                 storePath = storePath +"/map2.png";
-                loadPath = loadPath + "/map2/map1.jpg";
+                loadPathPng = loadPathPng + "/map2/map1.png";
                 fab.setVisibility(View.VISIBLE);
                 optionImages = Util.getBasicAmenitiesMapImages(this);
+                optionsRV.setBackgroundColor(Color.argb(108,84,156,246));
                 break;
             case 3:
                 storePath = storePath +"/map1.png";
-                loadPath = loadPath + "/map3/map1.jpg";;
+                loadPathPng = loadPathPng + "/map3/map1.png";
                 optionImages = loadImageFromStorage(Environment.getExternalStorageDirectory() + "/Sanlap/MapPic/");
+                optionsRV.setBackgroundColor(Color.argb(108,66,44,86));
                 break;
         }
-        mapImage.setImage(ImageSource.uri(loadPath));
+        mapImage.setImage(ImageSource.uri(loadPathPng));
         mapImage.setZoomEnabled(true);
     }
 
     private List<Bitmap> loadImageFromStorage(String loadPath) {
-        List<Bitmap> capturedImageList = new ArrayList<>();
-        try {
-            File dir = new File(loadPath);
-            ArrayList<File> files = new ArrayList<File>(Arrays.asList(dir.listFiles()));
-            for(File f : files) {
-                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-                capturedImageList.add(b);
-            }
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
+        final List<Bitmap> capturedImageList = new ArrayList<>();
+        File dir = new File(loadPath);
+        ArrayList<File> files = new ArrayList<File>(Arrays.asList(dir.listFiles()));
+        for(File f : files) {
+            capturedImageList.add(loadBitmap(f.getAbsolutePath(),75,75));
         }
         return capturedImageList;
     }
@@ -130,7 +135,6 @@ public class ResourceMappingActivity extends AppCompatActivity implements Issues
             }
         });
     }
-
 
 
     @Override
@@ -210,4 +214,6 @@ public class ResourceMappingActivity extends AppCompatActivity implements Issues
         mapImage.clearBitmaps();
         this.finish();
     }
+
+
 }

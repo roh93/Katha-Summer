@@ -16,8 +16,8 @@
 
     <string-array name="occupation_array">
         <item>Farmer</item>
-        <item>Domestic Helper</item>
-        <item>Industrialist</item>
+        <item>Domestic</item>
+        <item>Labourer</item>
         <item>Others</item>
     </string-array>
 

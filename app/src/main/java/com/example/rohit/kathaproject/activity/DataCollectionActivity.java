@@ -86,7 +86,6 @@ public class DataCollectionActivity extends AppCompatActivity implements IssuesA
         Intent pollingIntent = new Intent(this,PollingActivity.class);
         if(!newIssueImageList.isEmpty()){
             pollingIntent.putParcelableArrayListExtra("NewImage", (ArrayList<? extends Parcelable>) newIssueImageList);
-            //newIssueImageList.removeAll(newIssueImageList);
         }
         pollingIntent.putIntegerArrayListExtra("ChosenItems",chosenIssueListPositions);
         startActivity(pollingIntent);

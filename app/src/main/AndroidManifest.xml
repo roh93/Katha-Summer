@@ -73,7 +73,7 @@
 
         <activity
             android:name=".activity.TransectActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".services.AudioService"

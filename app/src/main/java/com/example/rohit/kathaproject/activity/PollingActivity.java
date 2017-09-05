@@ -1,11 +1,13 @@
 package com.example.rohit.kathaproject.activity;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,7 +33,12 @@ import com.example.rohit.kathaproject.helpers.NewIssueAddInterface;
 import com.example.rohit.kathaproject.helpers.WrapContentGridLayoutManager;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,6 +73,8 @@ public class PollingActivity extends AppCompatActivity implements IssuesAdapter.
     List<String> pollIssueNameList = new ArrayList<>();
     String chosenIssue;int size;
     private List<Bitmap> newIssueList = new ArrayList<>();
+    private SortedSet<Integer> chosenPos = new TreeSet<>();
+    SortedSet<String> voteChoiceSet = new TreeSet<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,62 +125,64 @@ public class PollingActivity extends AppCompatActivity implements IssuesAdapter.
 
     @OnClick(R.id.btn_vote)
     public void confirmSelection(){
-        /*new MaterialDialog.Builder(this)
-                .title("Confirm Selection")
-                .content("Do you want to Confirm the Selection?")
-                .positiveText("Yes").onPositive(new MaterialDialog.SingleButtonCallback() {
-            @Override
-            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                if(ageEt.getText()!= null) {
-                    pollingResultsCRUD.insertPollDetail(getPollingDTO());
-                    clearAllFields();
-                    dialog.dismiss();
+        if(voteChoiceSet.size()==3){
+            ArrayList<Integer> chosenPosList = new ArrayList<>();
+            final Dialog choiceDialog = new Dialog(PollingActivity.this);
+            choiceDialog.setContentView(R.layout.poll_choice_confirm_dialog);
+            choiceDialog.show();
+            TextView ageTV = (TextView) choiceDialog.findViewById(R.id.age_choice_tv);
+            TextView genderTV = (TextView) choiceDialog.findViewById(R.id.gender_choice_tv);
+            TextView occupationTV = (TextView) choiceDialog.findViewById(R.id.occupation_choice_tv);
+            TextView issueTV = (TextView) choiceDialog.findViewById(R.id.issue_choice_tv);
+            ImageView issue1IV = (ImageView) choiceDialog.findViewById(R.id.issue1_selected_iv);
+            ImageView issue2IV = (ImageView) choiceDialog.findViewById(R.id.issue2_selected_iv);
+            ImageView issue3IV = (ImageView) choiceDialog.findViewById(R.id.issue3_selected_iv);
+            ageTV.setText(ageEt.getText());
+            String sex;
+            if(maleButton.isChecked()){
+                sex = maleButton.getText().toString();
+            }else{
+                sex = femaleButton.getText().toString();
+            }
+            genderTV.setText(sex);
+            occupationTV.setText(getResources().getStringArray(R.array.occupation_array)[occupationSpinner.getSelectedItemPosition()]);
+            chosenIssue = "";
+            for (String aVoteChoiceSet : voteChoiceSet) {
+                chosenIssue += aVoteChoiceSet + ',';
+            }
+            for (Integer index : chosenPos){
+                chosenPosList.add(index);
+            }
+            issueTV.setText(chosenIssue);
+            issue1IV.setImageBitmap(pollItems.get(chosenPosList.get(0)));
+            issue2IV.setImageBitmap(pollItems.get(chosenPosList.get(1)));
+            issue3IV.setImageBitmap(pollItems.get(chosenPosList.get(2)));
+            Button confirmButton = (Button) choiceDialog.findViewById(R.id.confirm_btn);
+            Button cancelButton = (Button) choiceDialog.findViewById(R.id.cancel_btn);
+            confirmButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(ageEt.getText()!= null) {
+                        pollingResultsCRUD.insertPollDetail(getPollingDTO());
+                        clearAllFields();
+                        choiceDialog.dismiss();
+                    }
                 }
-            }
-        }).negativeText("No").onNegative(new MaterialDialog.SingleButtonCallback() {
-            @Override
-            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                dialog.dismiss();
-            }
-        }).show();*/
-
-        final Dialog choiceDialog = new Dialog(PollingActivity.this);
-        choiceDialog.setContentView(R.layout.poll_choice_confirm_dialog);
-        choiceDialog.show();
-        TextView ageTV = (TextView) choiceDialog.findViewById(R.id.age_choice_tv);
-        TextView genderTV = (TextView) choiceDialog.findViewById(R.id.gender_choice_tv);
-        TextView occupationTV = (TextView) choiceDialog.findViewById(R.id.occupation_choice_tv);
-        TextView issueTV = (TextView) choiceDialog.findViewById(R.id.issue_choice_tv);
-        ImageView issueIV = (ImageView) choiceDialog.findViewById(R.id.issue_selected_iv);
-        ageTV.setText(ageEt.getText());
-        String sex;
-        if(maleButton.isChecked()){
-            sex = maleButton.getText().toString();
-        }else{
-            sex = femaleButton.getText().toString();
-        }
-        genderTV.setText(sex);
-        occupationTV.setText(String.valueOf(occupationSpinner.getSelectedItem()));
-        issueTV.setText(chosenIssue);
-        //issueIV.setImageBitmap();
-        Button confirmButton = (Button) choiceDialog.findViewById(R.id.confirm_btn);
-        Button cancelButton = (Button) choiceDialog.findViewById(R.id.cancel_btn);
-        confirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(ageEt.getText()!= null) {
-                    pollingResultsCRUD.insertPollDetail(getPollingDTO());
-                    clearAllFields();
+            });
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     choiceDialog.dismiss();
+                    voteChoiceSet.clear();
                 }
+            });
+        }else {
+            String incompleteChoice="";
+            for (String aVoteChoiceSet : voteChoiceSet) {
+                incompleteChoice += aVoteChoiceSet + ',';
             }
-        });
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                choiceDialog.dismiss();
-            }
-        });
+            Toast.makeText(PollingActivity.this,"Must Select 3, Chosen so far:"+incompleteChoice,Toast.LENGTH_SHORT).show();
+        }
     }
 
     @OnClick(R.id.btn_finish_vote)
@@ -195,8 +206,11 @@ public class PollingActivity extends AppCompatActivity implements IssuesAdapter.
         }
         int age = Integer.parseInt(ageEt.getText().toString());
         String occupation = String.valueOf(occupationSpinner.getSelectedItem());
-        String issue = chosenIssue;
-        return new PollingDetail(sex,age,occupation,issue);
+        ArrayList<String> voteChoiceList = new ArrayList<>();
+        for(String s: voteChoiceSet){
+            voteChoiceList.add(s);
+        }
+        return new PollingDetail(sex,age,occupation,voteChoiceList.get(0),voteChoiceList.get(1),voteChoiceList.get(2));
     }
 
 
@@ -214,12 +228,18 @@ public class PollingActivity extends AppCompatActivity implements IssuesAdapter.
 
     @Override
     public void onItemClick(View view, int position) {
-        if(position<size) {
+        if(chosenIssueListPositions.get(position)<size) {
             chosenIssue = pollIssueNameList.get(chosenIssueListPositions.get(position));
         }else {
-            chosenIssue = "New Issue - "+(position%size);
+            chosenIssue = "New Issue -  "+(chosenIssueListPositions.get(position)%size);
         }
         Toast.makeText(PollingActivity.this,"You Selected : "+chosenIssue,Toast.LENGTH_LONG).show();
+        if(voteChoiceSet.size()==3){
+            voteChoiceSet.remove(voteChoiceSet.first());
+            chosenPos.remove(chosenPos.first());
+        }
+        voteChoiceSet.add(chosenIssue);
+        chosenPos.add(position);
     }
 
     @Override

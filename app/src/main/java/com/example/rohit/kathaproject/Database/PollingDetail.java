@@ -9,14 +9,18 @@ public class PollingDetail {
     private String sex;
     private int age;
     private String occupation;
-    private String issueName;
+    private String issueName1;
+    private String issueName2;
+    private String issueName3;
 
 
-    public PollingDetail(String sex, int age, String occupation, String issueName) {
+    public PollingDetail(String sex, int age, String occupation, String issueName1,String issueName2, String issueName3) {
         this.sex = sex;
         this.age = age;
         this.occupation = occupation;
-        this.issueName = issueName;
+        this.issueName1 = issueName1;
+        this.issueName2 = issueName2;
+        this.issueName3 = issueName3;
     }
 
     String getSex() {
@@ -34,8 +38,16 @@ public class PollingDetail {
     }
 
 
-    String getIssueName() {
-        return issueName;
+    String getIssueName1() {
+        return issueName1;
+    }
+
+    String getIssueName2() {
+        return issueName2;
+    }
+
+    String getIssueName3() {
+        return issueName3;
     }
 
 }

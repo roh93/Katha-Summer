@@ -21,6 +21,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Rohit on 10-07-2017.
@@ -126,7 +127,15 @@ public class Util {
     public static List<Bitmap> getAllMapImages(Context context) {
         List<Bitmap> imageList = new ArrayList<>();
         Bitmap icon;
+        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_atm);
+        imageList.add(icon);
         icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_anganwadi);
+        imageList.add(icon);
+        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_bank);
+        imageList.add(icon);
+        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_brick_house);
+        imageList.add(icon);
+        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_bus_stop);
         imageList.add(icon);
         icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_college);
         imageList.add(icon);
@@ -136,9 +145,23 @@ public class Util {
         imageList.add(icon);
         icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_electricity_transformer);
         imageList.add(icon);
+        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_ferry_ghat);
+        imageList.add(icon);
+        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_forest);
+        imageList.add(icon);
         icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_graveyard);
         imageList.add(icon);
+        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_hill);
+        imageList.add(icon);
+        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_hut_house);
+        imageList.add(icon);
         icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_hospital);
+        imageList.add(icon);
+        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_motorable_road);
+        imageList.add(icon);
+        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_non_motorable_road);
+        imageList.add(icon);
+        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_open_defecation);
         imageList.add(icon);
         icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_panchayat);
         imageList.add(icon);
@@ -146,13 +169,25 @@ public class Util {
         imageList.add(icon);
         icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_police_station);
         imageList.add(icon);
+        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_railway_station);
+        imageList.add(icon);
+        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_railway_line);
+        imageList.add(icon);
         icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_school);
+        imageList.add(icon);
+        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_shop);
+        imageList.add(icon);
+        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_shop_internet);
         imageList.add(icon);
         icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_telephone_booth);
         imageList.add(icon);
         icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_telephone_tower);
         imageList.add(icon);
         icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_temple);
+        imageList.add(icon);
+        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_toilet);
+        imageList.add(icon);
+        icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_tree);
         imageList.add(icon);
         icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.map_water_source_other);
         imageList.add(icon);
@@ -347,6 +382,7 @@ public class Util {
 
     public static String getMostCommonString(List<String> mostVoted){
         Map<String,Integer> counts = new HashMap<>();
+
         for(String s : mostVoted) {
             if(counts.containsKey(s)) {
                 counts.put(s,counts.get(s)+1);
@@ -354,15 +390,16 @@ public class Util {
                 counts.put(s,1);
             }
         }
-        Map.Entry<String,Integer> e = Collections.max(counts.entrySet(),new Comparator<Map.Entry<String,Integer>>() {
-
+        Set<Map.Entry<String, Integer>> set = counts.entrySet();
+        List<Map.Entry<String, Integer>> list = new ArrayList<>(set);
+        Collections.sort(list,new Comparator<Map.Entry<String,Integer>>() {
             @Override
             public int compare(Map.Entry<String,Integer> o1, Map.Entry<String,Integer> o2) {
-                return o1.getValue().compareTo(o2.getValue());
+                return o2.getValue().compareTo(o1.getValue());
             }
 
         });
-        return e.getKey();
+        return list.get(0)+", "+list.get(1)+", "+list.get(2);
     }
 
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_width="250dp"
+    android:layout_height="wrap_content" >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -86,35 +86,49 @@
             android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Issue Selected: " />
+            android:text="Issue: " />
     </RelativeLayout>
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <ImageView
-        android:id="@+id/issue_selected_iv"
-        android:layout_gravity="center"
-        android:layout_width="120dp"
-        android:layout_height="120dp" />
-
-    <LinearLayout
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/issue1_selected_iv"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+    <ImageView
+        android:id="@+id/issue2_selected_iv"
+        android:layout_centerHorizontal="true"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+    <ImageView
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/issue3_selected_iv"
+        android:layout_gravity="end"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+</RelativeLayout>
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:orientation="horizontal">
 
     <Button
         android:background="@drawable/done"
-        android:layout_weight="0.5"
         android:padding="10dp"
         android:id="@+id/confirm_btn"
-        android:layout_width="0dp"
-        android:layout_height="100dp" />
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
     <Button
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:background="@drawable/delete"
-        android:layout_weight="0.5"
         android:id="@+id/cancel_btn"
         android:layout_gravity="center"
-        android:layout_width="0dp"
-        android:layout_height="100dp" />
-    </LinearLayout>
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
+    </RelativeLayout>
 
 </LinearLayout>
