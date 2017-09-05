@@ -11,6 +11,8 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * Created by Rohit on 18-07-2017.
@@ -20,7 +22,9 @@ public class MapImage extends SubsamplingScaleImageView {
     private PointF sPin;
     private Bitmap pin;
     Paint paint = new Paint();
+    static int i=0;
     static HashMap<PointF,Bitmap> iconList = new HashMap<>();
+    private SortedMap<Integer,PointF> indexList = new TreeMap<>();
 
     public MapImage(Context context) {
         this(context, null);
@@ -35,6 +39,8 @@ public class MapImage extends SubsamplingScaleImageView {
         this.sPin = sPin;
         initialise(bitmap);
         iconList.put(sPin,this.pin);
+        indexList.put(i,sPin);
+        i++;
         invalidate();
     }
 
@@ -69,6 +75,15 @@ public class MapImage extends SubsamplingScaleImageView {
 
     public void clearBitmaps(){
         iconList.clear();
+    }
+
+    public void undo(){
+        if(!indexList.isEmpty()) {
+            iconList.remove(indexList.get(indexList.lastKey()));
+            indexList.remove(indexList.lastKey());
+            i--;
+            invalidate();
+        }
     }
 
 }

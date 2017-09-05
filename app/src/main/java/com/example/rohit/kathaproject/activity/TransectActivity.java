@@ -24,6 +24,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Rohit on 28-07-2017.
@@ -87,4 +88,10 @@ public class TransectActivity extends AppCompatActivity implements IssuesAdapter
     public void onItemClick(View view, int position) {
         optionImage = optionImages.get(position);
     }
+
+    @OnClick(R.id.undo_btn)
+    public void undoIconAddition(){
+        mapImage.undo();
+    }
+
 }

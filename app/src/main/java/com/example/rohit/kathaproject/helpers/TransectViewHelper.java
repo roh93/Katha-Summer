@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * Created by Rohit on 28-07-2017.
@@ -39,8 +41,9 @@ public class TransectViewHelper extends SubsamplingScaleImageView implements Vie
         super(context, attr);
         initialise();
     }
-
+    static int i=0;
     static HashMap<PointF,Bitmap> iconList = new HashMap<>();
+    private SortedMap<Integer,PointF> indexList = new TreeMap<>();
 
     public TransectViewHelper(Context context) {
         this(context, null);
@@ -61,6 +64,8 @@ public class TransectViewHelper extends SubsamplingScaleImageView implements Vie
         this.sPin = sPin;
         this.pin = Bitmap.createScaledBitmap(bitmap, 120, 120, true);
         iconList.put(sPin,this.pin);
+        indexList.put(i,sPin);
+        i++;
         invalidate();
     }
 
@@ -119,6 +124,15 @@ public class TransectViewHelper extends SubsamplingScaleImageView implements Vie
     public void reset() {
         this.sPoints = null;
         invalidate();
+    }
+
+    public void undo(){
+        if(!indexList.isEmpty()) {
+            iconList.remove(indexList.get(indexList.lastKey()));
+            indexList.remove(indexList.lastKey());
+            i--;
+            invalidate();
+        }
     }
 
     @Override

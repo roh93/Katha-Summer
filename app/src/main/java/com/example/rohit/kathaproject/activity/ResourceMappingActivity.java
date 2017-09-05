@@ -215,5 +215,9 @@ public class ResourceMappingActivity extends AppCompatActivity implements Issues
         this.finish();
     }
 
+    @OnClick(R.id.btn_remove_icons)
+    public void undoIconAddition(){
+        mapImage.undo();
+    }
 
 }

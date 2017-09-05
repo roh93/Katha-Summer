@@ -20,18 +20,28 @@
         android:id="@+id/rm_options_panel"
         android:layout_width="match_parent"
         android:layout_height="100dp"/>
-<View
-    android:layout_width="match_parent"
-    android:id="@+id/black_view"
-    android:layout_height="5dp"
-    android:background="@android:color/black"
-    android:layout_above="@id/rm_options_panel"/>
+    <View
+        android:layout_width="match_parent"
+        android:id="@+id/black_view"
+        android:layout_height="5dp"
+        android:background="@android:color/black"
+        android:layout_above="@id/rm_options_panel"/>
+
     <android.support.design.widget.FloatingActionButton
         android:visibility="gone"
         android:id="@+id/myFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/add"
+        app:elevation="4dp"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/btn_remove_icons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/delete"
         app:elevation="4dp"/>
 
 </RelativeLayout>
